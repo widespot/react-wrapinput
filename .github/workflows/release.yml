@@ -23,7 +23,7 @@ jobs:
           # Defaults to the user or organization that owns the workflow file
           scope: '@${{ env.GITHUB_REPOSITORY_OWNER }}'
 
-      - run: run echo $NPM_CONFIG_USERCONFIG
+      - run: echo $NPM_CONFIG_USERCONFIG
       - run: cat $NPM_CONFIG_USERCONFIG
       - name: Replace ${VERSION} in package.json with the tag version
         run: VERSION=${GITHUB_REF#refs/tags/v} && sed -i -- "s/\${VERSION}/$VERSION/g" ./package.json
