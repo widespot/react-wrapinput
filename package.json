@@ -1,5 +1,5 @@
 {
-  "name": "@raphaeljoie/react-wrapinput",
+  "name": "${SCOPE}react-wrapinput",
   "version": "${VERSION}",
   "description": "Input, but in wrap mode",
   "scripts": {
