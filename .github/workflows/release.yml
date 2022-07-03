@@ -23,14 +23,12 @@ jobs:
           # Defaults to the user or organization that owns the workflow file
           scope: '@${{ github.repository_owner }}'
 
-      - run: cat $NPM_CONFIG_USERCONFIG
       - name: Replace ${VERSION} in package.json with the tag version
         run: VERSION=${GITHUB_REF#refs/tags/v} && sed -i -- "s/\${VERSION}/$VERSION/g" ./package.json
       - name: Replace ${SCOPE} in package.json with the repo owner + "/"
         run: SCOPE=@$GITHUB_REPOSITORY_OWNER\\/ && sed -i -- "s/\${SCOPE}/$SCOPE/g" ./package.json
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm config get registry
       - run: npm publish
         env:
           # === NPM ===
@@ -39,31 +37,8 @@ jobs:
           # === GITHUB ===
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-      - name: Upload Release index.mjs
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./dist/esm/index.js
-          asset_name: index.mjs
-          asset_content_type: text/javascript
-      - name: Upload Release index.cjs
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./dist/cjs/index.js
-          asset_name: index.cjs
-          asset_content_type: text/javascript
+          name: Release ${{ github.ref }}
+          files: dist/*
