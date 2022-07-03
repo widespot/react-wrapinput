@@ -21,7 +21,7 @@ jobs:
           # === GITHUB ===
           registry-url: 'https://npm.pkg.github.com'
           # Defaults to the user or organization that owns the workflow file
-          scope: @${{ env.GITHUB_REPOSITORY_OWNER }}
+          scope: "@${{ env.GITHUB_REPOSITORY_OWNER }}"
 
       - name: Replace ${VERSION} in package.json with the tag version
         run: VERSION=${GITHUB_REF#refs/tags/v} && sed -i -- "s/\${VERSION}/$VERSION/g" ./package.json
