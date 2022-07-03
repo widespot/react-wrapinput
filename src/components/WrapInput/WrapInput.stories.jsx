@@ -4,8 +4,9 @@ import WrapInput from './WrapInput';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'ReactComponentLibrary/Button',
+  title: 'ReactComponentLibrary/WrapInput',
   component: WrapInput,
+  argTypes: { onChange: { action: 'changed' } },
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -16,7 +17,11 @@ function Template(args) {
       {' '}
       <WrapInput {...args} />
       {' '}
-      input
+      input based on a native
+      {' '}
+      <code>&lt;input&gt;</code>
+      {' '}
+      element
     </p>
   );
 }
@@ -24,9 +29,11 @@ function Template(args) {
 export const Placeholder = Template.bind({});
 Placeholder.args = {
   placeholder: 'undefined',
+  value: null,
 };
 
 export const NoPlaceholder = Template.bind({});
 NoPlaceholder.args = {
   placeholder: null,
+  value: null,
 };

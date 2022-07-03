@@ -9,7 +9,7 @@ return (
       {' '}
       <WrapInput placeholder="undefined" />
       {' '}
-      text
+      input based on a native &lt;input&gt; element
     </p>
 )
 ```
