@@ -21,12 +21,12 @@ jobs:
           # === GITHUB ===
           registry-url: 'https://npm.pkg.github.com'
           # Defaults to the user or organization that owns the workflow file
-          scope: ${{ env.GITHUB_REPOSITORY_OWNER }}
+          scope: @${{ env.GITHUB_REPOSITORY_OWNER }}
 
       - name: Replace ${VERSION} in package.json with the tag version
         run: VERSION=${GITHUB_REF#refs/tags/v} && sed -i -- "s/\${VERSION}/$VERSION/g" ./package.json
       - name: Replace ${SCOPE} in package.json with the repo owner + "/"
-        run: echo $GITHUB_REPOSITORY_OWNER && SCOPE=$GITHUB_REPOSITORY_OWNER\\/ && echo $SCOPE && sed -i -- "s/\${SCOPE}/$SCOPE/g" ./package.json
+        run: echo $GITHUB_REPOSITORY_OWNER && SCOPE=@$GITHUB_REPOSITORY_OWNER\\/ && echo $SCOPE && sed -i -- "s/\${SCOPE}/$SCOPE/g" ./package.json
       - run: npm ci
       - run: npm run build --if-present
       - run: npm publish
