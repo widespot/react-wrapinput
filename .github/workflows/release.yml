@@ -26,9 +26,10 @@ jobs:
       - name: Replace ${VERSION} in package.json with the tag version
         run: VERSION=${GITHUB_REF#refs/tags/v} && sed -i -- "s/\${VERSION}/$VERSION/g" ./package.json
       - name: Replace ${SCOPE} in package.json with the repo owner + "/"
-        run: echo $GITHUB_REPOSITORY_OWNER && SCOPE=@$GITHUB_REPOSITORY_OWNER\\/ && echo $SCOPE && sed -i -- "s/\${SCOPE}/$SCOPE/g" ./package.json
+        run: SCOPE=@$GITHUB_REPOSITORY_OWNER\\/ && sed -i -- "s/\${SCOPE}/$SCOPE/g" ./package.json
       - run: npm ci
       - run: npm run build --if-present
+      - run: npm config get registry
       - run: npm publish
         env:
           # === NPM ===
