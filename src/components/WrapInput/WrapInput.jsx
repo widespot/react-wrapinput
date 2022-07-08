@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './WrapInput.css';
-
 const spaceReplace = (s) => s && s.replace(/ /g, '\u00a0');
 
 export default function WrapInput({
@@ -29,6 +27,20 @@ export default function WrapInput({
           type={type}
           ref={elRef}
           value={v}
+          style={{
+            lineHeight: 'inherit',
+            textAlign: 'inherit',
+            padding: 0,
+            margin: 0,
+            border: 'none',
+            fontFamily: 'inherit',
+            fontSize: '1em',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+          }}
           onChange={(e) => {
             setV(e.target.value);
             onChange && onChange(e);
