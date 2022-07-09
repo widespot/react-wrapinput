@@ -39,3 +39,17 @@ NoPlaceholder.args = {
   value: '',
   name: 'display_name',
 };
+
+function MyInput({ ...props }) {
+  return (
+    <input {...props} type="number" />
+  );
+}
+
+export const CustomInput = Template.bind({});
+CustomInput.args = {
+  InputComponent: MyInput,
+  placeholder: null,
+  value: '',
+  name: 'display_name',
+};
