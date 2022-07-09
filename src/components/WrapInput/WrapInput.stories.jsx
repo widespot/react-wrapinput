@@ -29,13 +29,13 @@ function Template(args) {
 export const Placeholder = Template.bind({});
 Placeholder.args = {
   placeholder: 'undefined',
-  value: null,
+  value: '',
   name: 'display_name',
 };
 
 export const NoPlaceholder = Template.bind({});
 NoPlaceholder.args = {
   placeholder: null,
-  value: null,
+  value: '',
   name: 'display_name',
 };

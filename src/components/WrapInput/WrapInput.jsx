@@ -14,11 +14,11 @@ export default function WrapInput({
   }, [value]);
 
   return (
-    <div
+    <span
       style={{ ...style, cursor: 'text', display: 'inline-block' }}
       onClick={() => elRef.current.focus()}
     >
-      <div style={{ position: 'relative' }}>
+      <span style={{ position: 'relative', display: 'block' }}>
         <span style={{ whiteSpace: 'nowrap', minWidth: 15, display: 'inline-block' }}>
           {spaceReplace(v) || placeholder || <>&nbsp;</>}
         </span>
@@ -47,7 +47,7 @@ export default function WrapInput({
             onChange && onChange(e);
           }}
         />
-      </div>
-    </div>
+      </span>
+    </span>
   );
 }
