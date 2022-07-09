@@ -3,7 +3,7 @@ import React from 'react';
 const spaceReplace = (s) => s && s.replace(/ /g, '\u00a0');
 
 export default function WrapInput({
-  value, onChange, style, type, placeholder,
+  value, onChange, style, type, placeholder, name,
 }) {
   const elRef = React.useRef();
 
@@ -27,6 +27,7 @@ export default function WrapInput({
           type={type}
           ref={elRef}
           value={v}
+          name={name}
           style={{
             lineHeight: 'inherit',
             textAlign: 'inherit',
