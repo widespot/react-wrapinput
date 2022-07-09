@@ -1,6 +1,6 @@
 import React from 'react';
 
-const spaceReplace = (s) => s && s.replace(/ /g, '\u00a0');
+const spaceReplace = (s) => s && `${s}`.replace(/ /g, '\u00a0');
 
 export default function WrapInput({
   value, onChange, style, type, placeholder, name, InputComponent,
